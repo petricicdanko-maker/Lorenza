@@ -3,60 +3,47 @@
 <head>
 <meta charset="utf-8">
 <meta name="apple-mobile-web-app-title" content="Lorenza">
-<meta name="theme-color" content="#7C6FF7">
+<meta name="theme-color" content="#FFFFFF">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="apple-touch-icon.png">
 <title>Control Lorenza</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="mobile-web-app-capable" content="yes">
+<meta name="color-scheme" content="light">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Inter:wght@400;500;600&display=swap">
 <style>
 :root {
-  --bg: #0F1117;
-  --surf: #1A1D27;
-  --surf2: #222534;
-  --surf3: #2A2E40;
-  --border: rgba(255,255,255,0.08);
-  --text: #F0F0F8;
-  --text2: #9B9BB8;
-  --text3: #6B6B88;
-  --purple: #7C6FF7;
-  --purple-l: rgba(124,111,247,0.15);
-  --purple-ll: rgba(124,111,247,0.08);
-  --green: #4ADE80;
-  --green-l: rgba(74,222,128,0.15);
-  --amber: #FBBF24;
-  --amber-l: rgba(251,191,36,0.15);
-  --red: #F87171;
-  --red-l: rgba(248,113,113,0.15);
-  --blue: #60A5FA;
-  --blue-l: rgba(96,165,250,0.15);
-  --radius: 16px;
-  --radius-sm: 10px;
-}
-@media (prefers-color-scheme: light) {
-  :root:not([data-theme="dark"]) {
-    --bg: #F0F0F8;
-    --surf: #FFFFFF;
-    --surf2: #F5F5FF;
-    --surf3: #EAEAF8;
-    --border: rgba(0,0,0,0.08);
-    --text: #12121E;
-    --text2: #555568;
-    --text3: #888899;
-  }
-}
-:root[data-theme="light"] {
-  --bg: #F0F0F8;
+  /* Tema claro único: suave, cálido y fácil de leer */
+  color-scheme: light;
+  --bg: #F5F3FA;
   --surf: #FFFFFF;
-  --surf2: #F5F5FF;
-  --surf3: #EAEAF8;
-  --border: rgba(0,0,0,0.08);
-  --text: #12121E;
-  --text2: #555568;
-  --text3: #888899;
+  --surf2: #FAF9FE;
+  --surf3: #EFECF8;
+  --border: #E6E2F1;
+  --text: #2A2540;
+  --text2: #555069;
+  --text3: #726C88;
+  --purple: #6C5CE0;
+  --purple-l: #ECE9FD;
+  --purple-ll: #F6F4FE;
+  --green: #1C8C5E;
+  --green-l: #E2F5EC;
+  --amber: #A5670A;
+  --amber-l: #FDF2DD;
+  --red: #CF3F3F;
+  --red-l: #FDEDED;
+  --red-b: #F6CACA;
+  --blue: #2F72CF;
+  --blue-l: #E5EFFC;
+  --c-crisis: #e34948;
+  --c-comida: #1baf7a;
+  --c-med: #4a3aa7;
+  --c-omit: #eb6834;
+  --radius: 18px;
+  --radius-sm: 12px;
+  --sombra: 0 1px 2px rgba(42,37,64,.04), 0 4px 14px rgba(42,37,64,.05);
 }
 * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
 html { height: 100%; height: -webkit-fill-available; }
@@ -67,6 +54,7 @@ body { height: 100%; min-height: -webkit-fill-available; font-family: 'Nunito', 
 /* TOPBAR */
 .topbar {
   background: var(--surf);
+  box-shadow: 0 2px 12px rgba(42,37,64,.05);
   border-bottom: 1px solid var(--border);
   padding: 12px 18px 12px;
   padding-top: calc(12px + env(safe-area-inset-top, 0px));
@@ -74,7 +62,8 @@ body { height: 100%; min-height: -webkit-fill-available; font-family: 'Nunito', 
 }
 .topbar-inner { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
 .app-logo { width: 38px; height: 38px; border-radius: 12px; background: var(--purple-l); display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; }
-.app-name { font-size: 18px; font-weight: 800; color: var(--text); letter-spacing: -0.3px; }
+.app-name { font-size: 19px; font-weight: 800; color: var(--text); letter-spacing: -0.3px; }
+.saludo { font-size: 13.5px; color: var(--text2); margin-top: 1px; font-weight: 600; }
 .app-name span { color: var(--purple); }
 .sync-pill { display: inline-flex; align-items: center; gap: 5px; font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 600; padding: 4px 10px; border-radius: 20px; margin-left: auto; flex-shrink: 0; }
 .sp-ok { background: var(--green-l); color: var(--green); }
@@ -92,12 +81,12 @@ body { height: 100%; min-height: -webkit-fill-available; font-family: 'Nunito', 
 .screen { display: none; } .screen.active { display: block; }
 
 /* SECTION LABELS */
-.sec-label { font-size: 11px; font-weight: 800; color: var(--text3); text-transform: uppercase; letter-spacing: 1px; margin: 20px 0 10px; }
+.sec-label { font-size: 16px; font-weight: 800; color: var(--text); margin: 22px 2px 10px; }
 .sec-row { display: flex; align-items: center; justify-content: space-between; margin: 20px 0 10px; }
 .sec-row .sec-label { margin: 0; }
 
 /* CARDS */
-.card { background: var(--surf); border: 1px solid var(--border); border-radius: var(--radius); margin-bottom: 12px; overflow: hidden; }
+.card { background: var(--surf); border: 1px solid var(--border); border-radius: var(--radius); margin-bottom: 12px; overflow: hidden; box-shadow: var(--sombra); }
 .card-header { display: flex; align-items: center; gap: 12px; padding: 14px 16px; border-bottom: 1px solid var(--border); }
 .ch-icon { width: 38px; height: 38px; border-radius: 11px; display: flex; align-items: center; justify-content: center; font-size: 19px; flex-shrink: 0; }
 .ch-title { font-size: 15px; font-weight: 700; }
@@ -106,7 +95,7 @@ body { height: 100%; min-height: -webkit-fill-available; font-family: 'Nunito', 
 
 /* FIELDS */
 .field { margin-bottom: 10px; }
-.field label { display: block; font-size: 11px; font-weight: 700; color: var(--text3); margin-bottom: 5px; text-transform: uppercase; letter-spacing: 0.5px; }
+.field label { display: block; font-size: 14px; font-weight: 700; color: var(--text2); margin-bottom: 6px; }
 input[type=text], input[type=time], input[type=number], select, textarea {
   width: 100%; padding: 11px 14px; border: 1.5px solid var(--border);
   border-radius: var(--radius-sm); font-size: 16px; font-family: 'Nunito', sans-serif;
@@ -147,7 +136,7 @@ input[type=email], input[type=password] { width: 100%; padding: 11px 14px; borde
 /* REGISTROS GUARDADOS (solo lectura) */
 .guardados { display: flex; flex-direction: column; gap: 8px; }
 .reg-item { display: flex; align-items: flex-start; gap: 12px; background: var(--surf); border: 1px solid var(--border); border-radius: 12px; padding: 11px 12px; }
-.reg-crisis { background: var(--red-l); border-color: rgba(248,113,113,0.25); }
+.reg-crisis { background: var(--red-l); border-color: var(--red-b); }
 .reg-editando { outline: 2px solid var(--amber); outline-offset: -1px; }
 .reg-hora { font-family: 'Inter', sans-serif; font-variant-numeric: tabular-nums; font-weight: 700; font-size: 14px; min-width: 46px; padding-top: 2px; white-space: nowrap; }
 .reg-txt { flex: 1; min-width: 0; font-size: 14px; line-height: 1.45; overflow-wrap: anywhere; }
@@ -159,31 +148,31 @@ input[type=email], input[type=password] { width: 100%; padding: 11px 14px; borde
 .er-edit { background: var(--amber-l); color: var(--amber); }
 
 /* CRISIS */
-.crisis-entry { background: var(--red-l); border: 1.5px solid rgba(248,113,113,0.25); border-radius: 15px; padding: 15px; margin-bottom: 12px; }
+.crisis-entry { background: var(--red-l); border: 1.5px solid var(--red-b); border-radius: 15px; padding: 15px; margin-bottom: 12px; }
 .crisis-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
 .crisis-label { font-size: 15px; font-weight: 800; color: var(--red); }
 
 /* TIMER */
-.timer-box { display: flex; align-items: center; gap: 12px; background: var(--surf); border: 1px solid rgba(248,113,113,0.2); border-radius: 12px; padding: 13px 16px; margin-bottom: 12px; flex-wrap: wrap; }
+.timer-box { display: flex; align-items: center; gap: 12px; background: var(--surf); border: 1px solid var(--red-b); border-radius: 12px; padding: 13px 16px; margin-bottom: 12px; flex-wrap: wrap; }
 .timer-display { font-family: 'Inter', sans-serif; font-size: 34px; font-weight: 700; font-variant-numeric: tabular-nums; color: var(--red); min-width: 84px; }
-.timer-idle { color: var(--surf3); }
+.timer-idle { color: var(--red-b); }
 .btn-timer { padding: 11px 20px; border-radius: 11px; font-size: 15px; font-weight: 800; border: none; cursor: pointer; font-family: 'Nunito', sans-serif; min-height: 46px; }
 .btn-start { background: var(--red); color: white; }
-.btn-stop { background: var(--green); color: #0F1117; }
+.btn-stop { background: var(--green); color: #fff; }
 
 /* BUTTONS */
 .btn-add { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 13px; border: 2px dashed var(--border); border-radius: 11px; background: transparent; color: var(--text3); font-size: 15px; font-weight: 700; cursor: pointer; font-family: 'Nunito', sans-serif; transition: all 0.15s; min-height: 50px; }
 .btn-add:hover, .btn-add:active { border-color: var(--purple); color: var(--purple); background: var(--purple-ll); }
 
-.btn-save { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; padding: 16px; background: var(--purple); color: white; border: none; border-radius: var(--radius); font-size: 17px; font-weight: 800; cursor: pointer; margin-top: 16px; font-family: 'Nunito', sans-serif; box-shadow: 0 4px 24px rgba(124,111,247,0.35); transition: transform 0.1s, box-shadow 0.1s; min-height: 54px; }
-.btn-save:active { transform: scale(0.98); box-shadow: 0 2px 10px rgba(124,111,247,0.2); }
+.btn-save { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; padding: 16px; background: var(--purple); color: white; border: none; border-radius: var(--radius); font-size: 17px; font-weight: 800; cursor: pointer; margin-top: 16px; font-family: 'Nunito', sans-serif; box-shadow: 0 6px 18px rgba(108,92,224,0.28); transition: transform 0.1s, box-shadow 0.1s; min-height: 54px; }
+.btn-save:active { transform: scale(0.98); box-shadow: 0 2px 10px rgba(108,92,224,0.2); }
 .btn-save:disabled { opacity: 0.6; cursor: not-allowed; }
 
 .btn-sm { padding: 9px 15px; border-radius: 9px; font-size: 13px; font-weight: 700; border: none; cursor: pointer; font-family: 'Nunito', sans-serif; min-height: 38px; }
 .btn-refresh { background: var(--purple-l); color: var(--purple); }
 .btn-export { background: var(--green-l); color: var(--green); }
 .btn-edit { background: var(--surf3); color: var(--text2); border: 1px solid var(--border); border-radius: 8px; padding: 7px 12px; font-size: 13px; font-weight: 700; cursor: pointer; font-family: 'Nunito', sans-serif; min-height: 36px; }
-.btn-del { background: var(--red-l); color: var(--red); border: 1px solid rgba(248,113,113,0.2); border-radius: 8px; padding: 7px 12px; font-size: 13px; font-weight: 700; cursor: pointer; font-family: 'Nunito', sans-serif; min-height: 36px; }
+.btn-del { background: var(--red-l); color: var(--red); border: 1px solid var(--red-b); border-radius: 8px; padding: 7px 12px; font-size: 13px; font-weight: 700; cursor: pointer; font-family: 'Nunito', sans-serif; min-height: 36px; }
 
 /* HISTORY */
 .hist-record { background: var(--surf); border: 1.5px solid var(--border); border-radius: 15px; padding: 14px 16px; margin-bottom: 10px; transition: border-color 0.15s; }
@@ -207,7 +196,7 @@ input[type=email], input[type=password] { width: 100%; padding: 11px 14px; borde
   background: var(--surf); border-top: 1px solid var(--border);
   z-index: 50;
 }
-.nav-btn { display: flex; flex-direction: column; align-items: center; gap: 3px; padding: 10px 4px; padding-bottom: calc(10px + env(safe-area-inset-bottom, 0px)); border: none; background: transparent; cursor: pointer; font-family: 'Nunito', sans-serif; font-size: 11px; font-weight: 700; color: var(--text3); transition: color 0.15s; }
+.nav-btn { display: flex; flex-direction: column; align-items: center; gap: 3px; padding: 10px 2px; padding-bottom: calc(10px + env(safe-area-inset-bottom, 0px)); border: none; background: transparent; cursor: pointer; font-family: 'Nunito', sans-serif; font-size: 11.5px; font-weight: 700; color: var(--text3); transition: color 0.15s; }
 .nav-btn.active { color: var(--purple); }
 .nav-icon { font-size: 24px; line-height: 1; }
 .nav-pip { width: 5px; height: 5px; border-radius: 50%; background: var(--purple); display: none; }
@@ -223,35 +212,48 @@ input[type=email], input[type=password] { width: 100%; padding: 11px 14px; borde
 .empty-sub { font-size: 14px; }
 
 /* ANÁLISIS */
-.chart-card { background: var(--surf); border: 1px solid var(--border); border-radius: var(--radius); margin-bottom: 16px; overflow: hidden; }
-.chart-header { padding: 14px 16px 0; }
-.chart-title { font-size: 15px; font-weight: 800; color: var(--text); }
-.chart-sub { font-size: 12px; color: var(--text3); margin-top: 2px; font-family: 'Inter', sans-serif; }
-.chart-wrap { padding: 12px 10px 14px; position: relative; }
-canvas { display: block; max-width: 100%; }
+.periodo { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; background: var(--surf); border: 1px solid var(--border); border-radius: 12px; padding: 4px; margin: 16px 0 12px; }
+.periodo button { border: none; background: transparent; color: var(--text2); font: 700 14px 'Nunito', sans-serif; padding: 9px 0; border-radius: 9px; cursor: pointer; min-height: 40px; }
+.periodo button[aria-pressed="true"] { background: var(--purple); color: #fff; }
+.chart-card { background: var(--surf); border: 1px solid var(--border); border-radius: var(--radius); margin-bottom: 14px; overflow: hidden; box-shadow: var(--sombra); }
+.chart-header { padding: 14px 16px 6px; }
+.chart-title { font-size: 16px; font-weight: 800; color: var(--text); text-wrap: balance; }
+.chart-sub { font-size: 12.5px; color: var(--text2); margin-top: 3px; font-family: 'Inter', sans-serif; line-height: 1.45; }
+.sub-pad { padding: 0 16px; }
+.sub-titulo { font-size: 13px; font-weight: 800; color: var(--text); padding: 14px 16px 2px; border-top: 1px solid var(--border); margin-top: 6px; }
+.viz { padding: 6px 12px 4px; }
+.viz svg { display: block; max-width: 100%; height: auto; overflow: visible; }
+.viz-vacio { font-size: 13.5px; color: var(--text3); padding: 14px 4px; font-family: 'Inter', sans-serif; line-height: 1.5; }
+.viz .grid { stroke: var(--border); stroke-width: 1; }
+.viz .axis { stroke: var(--text3); stroke-width: 1; opacity: .55; }
+.viz .tick { fill: var(--text3); font: 500 11px 'Inter', sans-serif; }
+.viz .lbl { fill: var(--text); font: 700 11px 'Inter', sans-serif; }
+.viz .lbl-med { fill: var(--text); font: 700 13px 'Nunito', sans-serif; }
+.viz .hit { fill: transparent; cursor: pointer; }
+.viz .ring { stroke: var(--surf); stroke-width: 2; paint-order: stroke; }
+.m-crisis { fill: var(--c-crisis); } .m-comida { fill: var(--c-comida); } .m-med { fill: var(--c-med); } .m-omit { fill: var(--c-omit); }
+.m-cero { fill: var(--text3); } .hm-base { fill: var(--surf3); }
+.chart-nota { display: flex; flex-wrap: wrap; gap: 6px 14px; padding: 2px 16px 8px; font: 500 12px 'Inter', sans-serif; color: var(--text2); align-items: center; }
+.ley { display: inline-flex; align-items: center; gap: 6px; }
+.sw { display: inline-block; width: 12px; height: 12px; border-radius: 3px; }
+.m-crisis-bg { background: var(--c-crisis); } .m-med-bg { background: var(--c-med); } .m-omit-bg { background: var(--c-omit); }
+.sw-punto { width: 5px; height: 5px; border-radius: 50%; background: var(--text3); }
+.escala { gap: 4px; } .escala .esc-paso { display: inline-flex; } .escala span:last-child { margin-left: 4px; } .escala span:first-child { margin-right: 4px; }
+.datos { border-top: 1px solid var(--border); }
+.datos summary { padding: 10px 16px; font: 700 13px 'Nunito', sans-serif; color: var(--purple); cursor: pointer; list-style-position: inside; }
+.tabla-wrap { overflow-x: auto; padding: 0 16px 12px; }
+.datos table { width: 100%; border-collapse: collapse; font: 12.5px 'Inter', sans-serif; font-variant-numeric: tabular-nums; }
+.datos th { text-align: left; color: var(--text3); font-weight: 600; padding: 6px 8px 6px 0; border-bottom: 1px solid var(--border); white-space: nowrap; }
+.datos td { color: var(--text2); padding: 6px 8px 6px 0; border-bottom: 1px solid var(--border); vertical-align: top; }
+.tip { position: fixed; z-index: 300; max-width: min(300px, 86vw); background: var(--surf3); color: var(--text); border: 1px solid var(--border); border-radius: 10px; padding: 8px 11px; font: 600 13px 'Inter', sans-serif; line-height: 1.4; box-shadow: 0 6px 24px rgba(0,0,0,.28); pointer-events: none; }
+.aviso-analisis { font: 12.5px 'Inter', sans-serif; color: var(--text3); line-height: 1.55; padding: 4px 4px 8px; }
 
 /* STAT TILES */
-.stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 16px; }
-.stat-tile { background: var(--surf); border: 1px solid var(--border); border-radius: var(--radius); padding: 15px 16px; }
-.st-label { font-size: 11px; font-weight: 800; color: var(--text3); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 7px; }
-.st-value { font-size: 30px; font-weight: 900; font-family: 'Inter', sans-serif; font-variant-numeric: tabular-nums; line-height: 1; margin-bottom: 4px; }
+.stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 14px; }
+.stat-tile { background: var(--surf); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px 16px; box-shadow: var(--sombra); }
+.st-label { font-size: 13.5px; font-weight: 700; color: var(--text2); margin-bottom: 8px; }
+.st-value { font-size: 30px; font-weight: 800; font-family: 'Inter', sans-serif; line-height: 1; margin-bottom: 5px; color: var(--text); }
 .st-sub { font-size: 12px; color: var(--text3); font-family: 'Inter', sans-serif; }
-.tv-red { color: var(--red); }
-.tv-purple { color: var(--purple); }
-.tv-green { color: var(--green); }
-.tv-amber { color: var(--amber); }
-
-/* HEATMAP */
-.heatmap-grid { display: grid; grid-template-columns: repeat(24, 1fr); gap: 3px; padding: 0 8px 12px; }
-.hm-cell { aspect-ratio: 1; border-radius: 4px; background: var(--surf3); transition: background 0.2s; }
-.hm-labels { display: grid; grid-template-columns: repeat(6, 1fr); padding: 0 8px; margin-bottom: 5px; }
-.hm-label { font-family: 'Inter', sans-serif; font-size: 10px; color: var(--text3); }
-
-/* INSIGHT BOX */
-.insight { display: flex; gap: 12px; align-items: flex-start; background: var(--purple-ll); border: 1px solid var(--purple-l); border-radius: 13px; padding: 13px 15px; margin-bottom: 12px; }
-.insight-icon { font-size: 20px; flex-shrink: 0; }
-.insight-text { font-size: 13px; color: var(--text2); line-height: 1.65; font-family: 'Inter', sans-serif; }
-.insight-text strong { color: var(--text); font-family: 'Nunito', sans-serif; }
 
 /* SPIN */
 .spin { display: inline-block; width: 14px; height: 14px; border: 2px solid rgba(255,255,255,0.3); border-top-color: white; border-radius: 50%; animation: sp 0.7s linear infinite; vertical-align: middle; }
@@ -271,7 +273,8 @@ canvas { display: block; max-width: 100%; }
     <div class="topbar-inner">
       <div class="app-logo">💜</div>
       <div>
-        <div class="app-name">Control<span>Lorenza</span></div>
+        <div class="app-name">Control <span>Lorenza</span></div>
+        <div class="saludo" id="saludo"></div>
       </div>
       <span class="sync-pill sp-load" id="sbadge"><span class="sp-dot"></span> Conectando</span>
     </div>
@@ -293,7 +296,7 @@ canvas { display: block; max-width: 100%; }
       <div class="card">
         <div class="card-body"><div id="meds-list"></div><button class="btn-add" onclick="addMed()">＋ Agregar medicamento</button></div>
       </div>
-      <div class="field"><label>Observaciones</label><textarea id="obs-meds" placeholder="Efectos adversos, dosis saltadas, reacciones..."></textarea></div>
+      <div class="field"><label>Observaciones</label><textarea id="obs-meds" placeholder="¿Algo que anotar? Ej: tuvo sueño después del remedio"></textarea></div>
       <button class="btn-save" id="bsm" onclick="guardar()">💾 Guardar</button>
     </div>
 
@@ -305,7 +308,7 @@ canvas { display: block; max-width: 100%; }
       <div class="card">
         <div class="card-body"><div id="comidas-list"></div><button class="btn-add" onclick="addComida()">＋ Agregar comida</button></div>
       </div>
-      <div class="field"><label>Observaciones de alimentación</label><textarea id="obs-alim" placeholder="Tolerancia, apetito, nivel de cetosis, vómitos..."></textarea></div>
+      <div class="field"><label>Observaciones de alimentación</label><textarea id="obs-alim" placeholder="¿Cómo comió hoy? Apetito, cetosis, vómitos..."></textarea></div>
       <button class="btn-save" id="bsf" onclick="guardar()">💾 Guardar</button>
     </div>
 
@@ -316,46 +319,53 @@ canvas { display: block; max-width: 100%; }
       <div class="sec-label">Nueva crisis</div>
       <div id="crisis-list"></div>
       <button class="btn-add" onclick="addCrisis()" style="margin-bottom:12px">＋ Registrar nueva crisis</button>
-      <div class="field"><label>Observaciones del día</label><textarea id="obs-crisis" placeholder="Triggers, patrón, estado general, post-ictal..."></textarea></div>
+      <div class="field"><label>Observaciones del día</label><textarea id="obs-crisis" placeholder="¿Cómo estuvo el día? Qué pudo gatillar las crisis, cómo quedó después..."></textarea></div>
       <button class="btn-save" id="bsc" onclick="guardar()">💾 Guardar</button>
     </div>
 
     <!-- ANÁLISIS -->
     <div class="screen" id="screen-analisis">
-      <div class="sec-label">Resumen general</div>
+      <div class="periodo" role="group" aria-label="Período del análisis">
+        <button data-dias="14" aria-pressed="false" onclick="elegirPeriodo(14)">14 días</button>
+        <button data-dias="30" aria-pressed="true" onclick="elegirPeriodo(30)">30 días</button>
+        <button data-dias="90" aria-pressed="false" onclick="elegirPeriodo(90)">90 días</button>
+      </div>
       <div class="stat-grid" id="stat-grid"></div>
 
-      <div class="insight" id="insight-box" style="display:none">
-        <div class="insight-icon">💡</div>
-        <div class="insight-text" id="insight-text"></div>
-      </div>
+      <section class="chart-card">
+        <div class="chart-header"><h2 class="chart-title">1 · Crisis por día</h2><div class="chart-sub" id="g1-sub"></div></div>
+        <div class="viz" id="g1"></div>
+        <div class="chart-nota"><span class="ley"><i class="sw m-crisis-bg"></i>Crisis</span><span class="ley"><i class="sw sw-punto"></i>Día registrado sin crisis</span></div>
+        <details class="datos"><summary>Ver datos</summary><div id="g1-tabla"></div></details>
+      </section>
 
-      <div class="sec-label">Crisis por día (últimas 4 semanas)</div>
-      <div class="chart-card">
-        <div class="chart-wrap"><canvas id="chart-crisis" height="140"></canvas></div>
-      </div>
+      <section class="chart-card">
+        <div class="chart-header"><h2 class="chart-title">2 · Mapa de calor de crisis</h2><div class="chart-sub" id="g2-sub"></div></div>
+        <div class="viz" id="g2"></div>
+        <div class="chart-nota escala" id="g2-leyenda"></div>
+        <details class="datos"><summary>Ver datos</summary><div id="g2-tabla"></div></details>
+      </section>
 
-      <div class="sec-label">Crisis por hora del día</div>
-      <div class="chart-card">
-        <div class="chart-header"><div class="chart-sub">Mapa de calor — hora de inicio</div></div>
-        <div style="padding:10px 6px 4px">
-          <div class="hm-labels">
-            <span class="hm-label">00h</span><span class="hm-label">04h</span><span class="hm-label">08h</span>
-            <span class="hm-label">12h</span><span class="hm-label">16h</span><span class="hm-label">20h</span>
-          </div>
-          <div class="heatmap-grid" id="heatmap"></div>
-        </div>
-      </div>
+      <section class="chart-card">
+        <div class="chart-header"><h2 class="chart-title">3 · Medicamentos y crisis</h2><div class="chart-sub" id="g3-sub"></div></div>
+        <div class="chart-nota" id="g3-leyenda"></div>
+        <div class="viz" id="g3"></div>
+        <details class="datos"><summary>Ver datos</summary><div id="g3-tabla"></div></details>
+      </section>
 
-      <div class="sec-label">Cumplimiento de medicamentos</div>
-      <div class="chart-card">
-        <div class="chart-wrap"><canvas id="chart-meds" height="130"></canvas></div>
-      </div>
-
-      <div class="sec-label">Relación crisis ↔ dieta cetogénica</div>
-      <div class="chart-card">
-        <div class="chart-wrap"><canvas id="chart-relacion" height="150"></canvas></div>
-      </div>
+      <section class="chart-card">
+        <div class="chart-header"><h2 class="chart-title">4 · Dieta cetogénica y crisis</h2><div class="chart-sub">Promedio de crisis por día, según cómo comió ese día</div></div>
+        <div class="viz" id="g4a"></div>
+        <details class="datos"><summary>Ver datos</summary><div id="g4a-tabla"></div></details>
+        <div class="sub-titulo">Horarios del día · últimos 10 días registrados</div>
+        <div class="chart-nota"><span class="ley"><svg width="12" height="12" aria-hidden="true"><circle class="m-comida" cx="6" cy="6" r="5"/></svg>Comida</span><span class="ley"><svg width="12" height="12" aria-hidden="true"><path class="m-med" d="M6,0L12,11L0,11Z"/></svg>Medicamento</span><span class="ley"><svg width="16" height="12" aria-hidden="true"><rect class="m-crisis" x="0" y="1" width="16" height="10" rx="2"/></svg>Crisis</span></div>
+        <div class="viz" id="g4b"></div>
+        <div class="sub-titulo">Tiempo desde la última comida hasta cada crisis</div>
+        <div class="chart-sub sub-pad" id="g4c-sub"></div>
+        <div class="viz" id="g4c"></div>
+        <details class="datos"><summary>Ver datos</summary><div id="g4-tabla"></div></details>
+      </section>
+      <p class="aviso-analisis">Estos gráficos muestran asociaciones en los datos registrados, no causas. Con pocos días los promedios cambian mucho: úselos como apoyo para conversar con el neurólogo.</p>
     </div>
 
     <!-- HISTORIAL -->
@@ -375,19 +385,20 @@ canvas { display: block; max-width: 100%; }
 
   <!-- NAVBAR -->
   <nav class="navbar">
-    <button class="nav-btn active" id="nav-meds" onclick="goTo('meds')"><span class="nav-icon">💊</span><span>Meds</span><span class="nav-pip"></span></button>
-    <button class="nav-btn" id="nav-food" onclick="goTo('food')"><span class="nav-icon">🥑</span><span>Dieta</span><span class="nav-pip"></span></button>
+    <button class="nav-btn active" id="nav-meds" onclick="goTo('meds')"><span class="nav-icon">💊</span><span>Remedios</span><span class="nav-pip"></span></button>
+    <button class="nav-btn" id="nav-food" onclick="goTo('food')"><span class="nav-icon">🥑</span><span>Comidas</span><span class="nav-pip"></span></button>
     <button class="nav-btn" id="nav-crisis" onclick="goTo('crisis')"><span class="nav-icon">⚡</span><span>Crisis</span><span class="nav-pip"></span></button>
     <button class="nav-btn" id="nav-analisis" onclick="goTo('analisis')"><span class="nav-icon">📊</span><span>Análisis</span><span class="nav-pip"></span></button>
     <button class="nav-btn" id="nav-hist" onclick="goTo('hist')"><span class="nav-icon">📋</span><span>Historial</span><span class="nav-pip"></span></button>
   </nav>
 </div>
 <div class="toast" id="toast"></div>
+<div class="tip" id="tip" role="status" hidden></div>
 
 <div class="login" id="login" hidden>
   <form class="login-card" onsubmit="event.preventDefault(); entrar();">
     <div class="login-logo">💜</div>
-    <div class="login-title">Control<span>Lorenza</span></div>
+    <div class="login-title">Control <span>Lorenza</span></div>
     <div class="login-sub">Ingrese con su correo y contraseña. Solo se pide una vez en cada teléfono.</div>
     <div class="field"><label for="li-email">Correo</label><input type="email" id="li-email" autocomplete="username" autocapitalize="off" required></div>
     <div class="field"><label for="li-pass">Contraseña</label><input type="password" id="li-pass" autocomplete="current-password" required></div>
@@ -498,7 +509,7 @@ async function entrar(){
     document.getElementById('li-pass').value='';
     document.getElementById('login').hidden=true;
     mostrarSesion();
-    showToast('✓ Bienvenido/a','#4ADE80');
+    showToast('✓ Bienvenido/a','#1E8E5A');
     cargarNube();
   }catch(e){
     msg.textContent='Sin conexión a internet. Conéctese y vuelva a intentar.';
@@ -572,7 +583,11 @@ function badge(t,cls){
   b.className='sync-pill '+cls;
   b.innerHTML='<span class="sp-dot"></span> '+t;
 }
-function sub(){ const n=records.length; document.getElementById('tsub').textContent=n+' día'+(n!==1?'s':''); }
+function saludo(){
+  const d=new Date(), h=d.getHours(), s=h<12?'Buenos días':h<20?'Buenas tardes':'Buenas noches';
+  const el=document.getElementById('saludo'); if(el) el.textContent=s+' · '+d.getDate()+' '+MESES[d.getMonth()].slice(0,3);
+}
+function sub(){ saludo(); const n=records.length; document.getElementById('tsub').textContent=n+' día'+(n!==1?'s':''); }
 function refrescarTodo(){ reconstruir(); sub(); renderHist(); renderAnalisis(); renderGuardados(); }
 
 // SYNC
@@ -594,7 +609,7 @@ async function cargarNube(){
     badge(queue.length?'Pendiente':'Sincronizado', queue.length?'sp-load':'sp-ok');
   }catch(e){
     if(e.message==='LOGIN') badge('Sin sesión','sp-err');
-    else if(e.message==='PERMISO'){ badge('Sin permiso','sp-err'); showToast('Esta cuenta no tiene permiso para ver los registros','#F87171'); }
+    else if(e.message==='PERMISO'){ badge('Sin permiso','sp-err'); showToast('Esta cuenta no tiene permiso para ver los registros','#C23B3B'); }
     else badge('Sin conexión','sp-err');
   }
   _syncing=false;
@@ -606,7 +621,7 @@ async function cargarNube(){
 
 // INIT
 async function init(){
-  cargarLocal(); cargarSesion(); mostrarSesion();
+  cargarLocal(); cargarSesion(); mostrarSesion(); initTip();
   if(FB_API_KEY&&!sesion) mostrarLogin();
   const fe=document.getElementById('fecha');
   fe.value=hoy();
@@ -740,7 +755,7 @@ function renderGuardados(){
 function pintar(tipo,titulo,lista,fmt,enEdicion){
   document.getElementById(tipo+'-tit').textContent=titulo+' este día'+(lista.length?' ('+lista.length+')':'');
   const c=document.getElementById(tipo+'-guardados');
-  if(!lista.length){ c.innerHTML='<div class="reg-vacio">Aún no hay registros este día.</div>'; return; }
+  if(!lista.length){ c.innerHTML='<div class="reg-vacio">Todavía no hay nada anotado este día.</div>'; return; }
   c.innerHTML=lista.map(x=>{ const v=fmt(x), p=esc(x._p);
     return `<div class="reg-item reg-${tipo}${enEdicion.has(x._p)?' reg-editando':''}" data-rp="${p}">
       <div class="reg-hora">${esc(v.hora||'--:--')}</div>
@@ -771,7 +786,7 @@ async function borrarReg(tipo,p){
   refrescarTodo();
   const ok=await enviar();
   badge(ok?'Sincronizado':'Pendiente',ok?'sp-ok':'sp-load');
-  showToast(ok?'Registro borrado':'Borrado (se sincronizará)','#F87171');
+  showToast(ok?'Registro borrado':'Borrado (se sincronizará)','#C23B3B');
 }
 
 function startTimer(n){
@@ -799,7 +814,7 @@ function stopTimer(n){
 
 async function guardar(){
   const f=fechaActual();
-  if(!f){ showToast('⚠️ Selecciona una fecha','#F87171'); return; }
+  if(!f){ showToast('⚠️ Selecciona una fecha','#C23B3B'); return; }
   const b={fecha:f}, tocadas=[];
   [['meds','#meds-list'],['comidas','#comidas-list'],['crisis','#crisis-list']].forEach(([tipo,sel])=>{
     document.querySelectorAll(sel+' > [data-p]').forEach(e=>{
@@ -813,7 +828,7 @@ async function guardar(){
   const obs={obsMeds:'obs-meds',obsAlim:'obs-alim',obsCrisis:'obs-crisis'};
   let nObs=0;
   for(const k in obs){ const v=document.getElementById(obs[k]).value; if(v!==obsCargadas[k]){ b[k]=v; obsCargadas[k]=v; nObs++; } }
-  if(!tocadas.length&&!nObs){ showToast('No hay datos nuevos para guardar','#FBBF24'); return; }
+  if(!tocadas.length&&!nObs){ showToast('No hay datos nuevos para guardar','#A86400'); return; }
   b.updatedAt=Date.now();
   encolar({m:'PATCH',p:keyDe(f),b});
   // el formulario queda en blanco para el siguiente registro (salvo una crisis con cronómetro corriendo)
@@ -829,8 +844,8 @@ async function guardar(){
   const ok=await enviar();
   ['bsm','bsf','bsc'].forEach(id=>{ const bt=document.getElementById(id); if(bt){ bt.disabled=false; bt.innerHTML='💾 Guardar'; } });
   const n=tocadas.length, txt=n?(n+' registro'+(n>1?'s':'')):'Observaciones';
-  if(ok){ badge('Sincronizado','sp-ok'); showToast('✓ '+txt+' guardado'+(n>1?'s':'')+' · formulario listo para otro','#4ADE80'); }
-  else{ badge('Pendiente','sp-load'); showToast('✓ Guardado en el teléfono · se enviará al volver la conexión','#FBBF24'); }
+  if(ok){ badge('Sincronizado','sp-ok'); showToast('✓ '+txt+' guardado'+(n>1?'s':'')+' · formulario listo para otro','#1E8E5A'); }
+  else{ badge('Pendiente','sp-load'); showToast('✓ Guardado en el teléfono · se enviará al volver la conexión','#A86400'); }
 }
 
 // HISTORIAL
@@ -871,7 +886,7 @@ async function eliminar(f){
   refrescarTodo();
   if(f===fechaActual()) cargarFecha(f);
   await enviar();
-  showToast('Día eliminado','#F87171');
+  showToast('Día eliminado','#C23B3B');
 }
 
 function exportarCSV(){
@@ -891,249 +906,254 @@ function exportarCSV(){
 }
 
 // ANÁLISIS Y GRÁFICOS
+// Todos los gráficos son SVG dibujados a partir de "records" (vista por día).
+// Colores por rol: --c-crisis, --c-comida, --c-med, --c-omit (validados para daltonismo).
+let periodoDias = 30;
+const DIAS_SEM = ['Lun','Mar','Mié','Jue','Vie','Sáb','Dom'];
+const DIAS_SEM_LARGO = ['Lunes','Martes','Miércoles','Jueves','Viernes','Sábado','Domingo'];
+
+function fechaISO(d){ return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate()); }
+function aMin(hhmm){ if(!hhmm||!/^\d{1,2}:\d{2}/.test(hhmm)) return null; const p=hhmm.split(':'); return parseInt(p[0])*60+parseInt(p[1]); }
+function fmtCorta(f){ const p=f.split('-'); return parseInt(p[2])+'/'+parseInt(p[1]); }
+function diaSem(f){ return (new Date(f+'T12:00:00').getDay()+6)%7; }   // 0 = lunes
+function fmtNum(x){ return (Math.round(x*10)/10).toString().replace('.',','); }
+function fmtHM(min){ const h=Math.floor(min/60), m=Math.round(min%60); return h?(h+' h'+(m?' '+m+' min':'')):(m+' min'); }
+function prom(a){ return a.length?a.reduce((s,x)=>s+x,0)/a.length:null; }
+// "Levetiracetam 250mg" y "levetiracetam" cuentan como el mismo medicamento
+function nombreMed(n){
+  n=(n||'').replace(/\b\d+([.,]\d+)?\s*(mg|ml|mcg|g|gr|gotas?|comp\w*|cc|ui)?\b/gi,' ').replace(/\s+/g,' ').trim();
+  return n?n.charAt(0).toUpperCase()+n.slice(1).toLowerCase():'';
+}
+function barV(x,y,w,h,r){ r=Math.min(r,h,w/2); return `M${x},${y+h}V${y+r}Q${x},${y} ${x+r},${y}H${x+w-r}Q${x+w},${y} ${x+w},${y+r}V${y+h}Z`; }
+function barH(x,y,w,h,r){ r=Math.min(r,w,h/2); return `M${x},${y}H${x+w-r}Q${x+w},${y} ${x+w},${y+r}V${y+h-r}Q${x+w},${y+h} ${x+w-r},${y+h}H${x}Z`; }
+function anchoDe(id){ return Math.max(260, Math.floor(document.getElementById(id).getBoundingClientRect().width)); }
+function svg(w,h,inner,label){ return `<svg viewBox="0 0 ${w} ${h}" width="${w}" height="${h}" role="img" aria-label="${esc(label)}">${inner}</svg>`; }
+function vacio(id,txt){ document.getElementById(id).innerHTML=`<div class="viz-vacio">${txt}</div>`; }
+function tabla(id,cab,filas){
+  document.getElementById(id).innerHTML=filas.length
+    ?`<div class="tabla-wrap"><table><thead><tr>${cab.map(c=>`<th>${c}</th>`).join('')}</tr></thead><tbody>${filas.map(f=>`<tr>${f.map(c=>`<td>${c}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`
+    :'<div class="viz-vacio">Sin datos en este período.</div>';
+}
+function escalaEntera(max){ const step=max<=5?1:max<=10?2:Math.ceil(max/4); return {step, top:Math.max(step,Math.ceil(max/step)*step)}; }
+
+function datosPeriodo(){
+  const dias=[]; const h=new Date(); h.setHours(12,0,0,0);
+  for(let i=periodoDias-1;i>=0;i--){ const d=new Date(h); d.setDate(h.getDate()-i); dias.push(fechaISO(d)); }
+  const porFecha={}; records.forEach(r=>{ porFecha[r.fecha]=r; });
+  const enPeriodo={}; dias.forEach(f=>{ if(porFecha[f]) enPeriodo[f]=porFecha[f]; });
+  return {dias, porFecha:enPeriodo, todos:porFecha, registrados:dias.filter(f=>enPeriodo[f])};
+}
+
 function renderAnalisis(){
-  const sg=document.getElementById('stat-grid');
-  const totalCrisis=records.reduce((a,r)=>a+(r.crisis?r.crisis.filter(c=>c.tipo).length:0),0);
-  const ultimos7=records.filter(r=>{ const d=new Date(r.fecha); const hd=new Date(); hd.setDate(hd.getDate()-7); return d>=hd; });
-  const crisis7=ultimos7.reduce((a,r)=>a+(r.crisis?r.crisis.filter(c=>c.tipo).length:0),0);
-  const totalDosis=records.reduce((a,r)=>{ getMedsArr(r).filter(m=>m.nombre).forEach(m=>{ if(m.admin==='Sí ✓')a.ok++; else if(m.admin==='No ✗')a.no++; else a.parcial++; }); return a; },{ok:0,no:0,parcial:0});
-  const totalDosisNum=totalDosis.ok+totalDosis.no+totalDosis.parcial;
-  const pctCumpl=totalDosisNum>0?Math.round((totalDosis.ok/totalDosisNum)*100):0;
-  const diasSinCrisis=records.filter(r=>!r.crisis||r.crisis.filter(c=>c.tipo).length===0).length;
-
-  sg.innerHTML=`
-    <div class="stat-tile"><div class="st-label">Crisis totales</div><div class="st-value tv-red">${totalCrisis}</div><div class="st-sub">en ${records.length} días</div></div>
-    <div class="stat-tile"><div class="st-label">Últimos 7 días</div><div class="st-value tv-amber">${crisis7}</div><div class="st-sub">crisis esta semana</div></div>
-    <div class="stat-tile"><div class="st-label">Medicamentos</div><div class="st-value tv-purple">${pctCumpl}%</div><div class="st-sub">cumplimiento</div></div>
-    <div class="stat-tile"><div class="st-label">Días sin crisis</div><div class="st-value tv-green">${diasSinCrisis}</div><div class="st-sub">de ${records.length} registrados</div></div>`;
-
-  // INSIGHT
-  const ib=document.getElementById('insight-box');
-  if(records.length>=3){
-    const diasBuenaDieta=records.filter(r=>r.comidas&&r.comidas.length>=3&&r.comidas.every(c=>c.estado==='Completo'));
-    const diasMalaDieta=records.filter(r=>r.comidas&&r.comidas.some(c=>c.estado!=='Completo'));
-    const crisisBuena=diasBuenaDieta.length>0?diasBuenaDieta.reduce((a,r)=>a+(r.crisis?r.crisis.filter(c=>c.tipo).length:0),0)/diasBuenaDieta.length:null;
-    const crisisMala=diasMalaDieta.length>0?diasMalaDieta.reduce((a,r)=>a+(r.crisis?r.crisis.filter(c=>c.tipo).length:0),0)/diasMalaDieta.length:null;
-    let insight='';
-    if(crisisBuena!==null&&crisisMala!==null&&diasBuenaDieta.length>0&&diasMalaDieta.length>0){
-      if(crisisBuena<crisisMala) insight=`En días con <strong>dieta completa</strong>, el promedio de crisis es <strong>${crisisBuena.toFixed(1)}</strong> vs <strong>${crisisMala.toFixed(1)}</strong> en días con dieta incompleta.`;
-      else if(crisisMala<crisisBuena) insight=`Los datos muestran <strong>${crisisBuena.toFixed(1)}</strong> crisis promedio en días de dieta completa vs <strong>${crisisMala.toFixed(1)}</strong> en días incompletos.`;
-      else insight=`No se observa diferencia clara entre adherencia a la dieta y frecuencia de crisis con los datos actuales.`;
-    } else if(records.length>0) insight=`Con más registros se podrá calcular la relación entre <strong>dieta cetogénica</strong> y <strong>frecuencia de crisis</strong>.`;
-    if(insight){ document.getElementById('insight-text').innerHTML=insight; ib.style.display='flex'; }
-    else ib.style.display='none';
-  } else ib.style.display='none';
-
-  drawCrisisChart();
-  drawHeatmap();
-  drawMedsChart();
-  drawRelacionChart();
+  const scr=document.getElementById('screen-analisis');
+  if(!scr||!scr.classList.contains('active')) return;   // se dibuja al abrir la pestaña
+  const d=datosPeriodo();
+  renderResumen(d); g1(d); g2(d); g3(d); g4dieta(d); g4linea(d); g4horas(d);
 }
 
-function getCSSVar(name){ return getComputedStyle(document.documentElement).getPropertyValue(name).trim(); }
+function renderResumen(d){
+  const regs=d.registrados.map(f=>d.porFecha[f]);
+  const tot=regs.reduce((a,r)=>a+r.crisis.length,0);
+  const sinCrisis=regs.filter(r=>!r.crisis.length).length;
+  const tomas=regs.flatMap(r=>r.meds); const dadas=tomas.filter(m=>m.admin==='Sí ✓').length;
+  const n=regs.length;
+  document.getElementById('stat-grid').innerHTML=`
+    <div class="stat-tile"><div class="st-label">Crisis</div><div class="st-value">${tot}</div><div class="st-sub">en ${n} día${n!==1?'s':''} registrado${n!==1?'s':''}</div></div>
+    <div class="stat-tile"><div class="st-label">Promedio diario</div><div class="st-value">${n?fmtNum(tot/n):'–'}</div><div class="st-sub">crisis por día registrado</div></div>
+    <div class="stat-tile"><div class="st-label">Días sin crisis</div><div class="st-value">${sinCrisis}</div><div class="st-sub">de ${n} registrado${n!==1?'s':''}</div></div>
+    <div class="stat-tile"><div class="st-label">Tomas dadas</div><div class="st-value">${tomas.length?Math.round(dadas/tomas.length*100)+'%':'–'}</div><div class="st-sub">${dadas} de ${tomas.length} registradas</div></div>`;
+}
 
-function drawCrisisChart(){
-  const canvas=document.getElementById('chart-crisis');
-  if(!canvas)return;
-  const ctx=canvas.getContext('2d');
-  const W=canvas.parentElement.clientWidth-20; const H=140;
-  canvas.width=W; canvas.height=H;
+// 1 · CRISIS POR DÍA ────────────────────────────────────────────
+function g1(d){
+  const W=anchoDe('g1'), H=180, L=26, R=6, T=18, B=24, gw=W-L-R, gh=H-T-B;
+  const vals=d.dias.map(f=>d.porFecha[f]?d.porFecha[f].crisis.length:null);
+  const reg=vals.filter(v=>v!=null), tot=reg.reduce((a,b)=>a+b,0);
+  document.getElementById('g1-sub').textContent=reg.length
+    ?`${tot} crisis en ${reg.length} días registrados · promedio ${fmtNum(tot/reg.length)} por día`
+    :'Todavía no hay días registrados en este período';
+  if(!reg.length){ vacio('g1','Registre crisis para ver este gráfico.'); tabla('g1-tabla',[],[]); return; }
+  const max=Math.max(0,...reg), {step,top}=escalaEntera(Math.max(1,max));
+  const slot=gw/d.dias.length, bw=Math.max(2,Math.min(16,slot-2));
+  const y=v=>T+gh-(v/top)*gh;
+  let s='';
+  for(let v=0;v<=top;v+=step) s+=`<line class="grid" x1="${L}" x2="${W-R}" y1="${y(v)}" y2="${y(v)}"/><text class="tick" x="${L-6}" y="${y(v)+4}" text-anchor="end">${v}</text>`;
+  const cada=d.dias.length<=14?2:7;
+  d.dias.forEach((f,i)=>{
+    const v=vals[i], x0=L+i*slot, cx=x0+slot/2, r=d.porFecha[f];
+    if(v>0) s+=`<path class="m-crisis" d="${barV(cx-bw/2,y(v),bw,T+gh-y(v),4)}"/>`;
+    else if(v===0) s+=`<circle class="m-cero" cx="${cx}" cy="${T+gh-3}" r="2"/>`;
+    const tip=v==null?`${fmtF(f)} · sin registro`:`${fmtF(f)} · ${v} crisis`+(v?': '+r.crisis.map(c=>c.tipo+(c.inicio?' '+c.inicio:'')).join(', '):'');
+    s+=`<rect class="hit" x="${x0}" y="${T-10}" width="${slot}" height="${gh+14}" data-tip="${esc(tip)}"/>`;
+    if((d.dias.length-1-i)%cada===0) s+=`<text class="tick" x="${cx}" y="${H-6}" text-anchor="middle">${fmtCorta(f)}</text>`;
+  });
+  if(max>0){ const i=vals.lastIndexOf(max); s+=`<text class="lbl" x="${L+i*slot+slot/2}" y="${y(max)-5}" text-anchor="middle">${max}</text>`; }
+  s+=`<line class="axis" x1="${L}" x2="${W-R}" y1="${T+gh}" y2="${T+gh}"/>`;
+  document.getElementById('g1').innerHTML=svg(W,H,s,'Crisis por día');
+  tabla('g1-tabla',['Fecha','Crisis','Detalle'],d.registrados.slice().reverse().map(f=>{ const r=d.porFecha[f]; return [fmtCorta(f),r.crisis.length,esc(r.crisis.map(c=>(c.inicio||'')+' '+c.tipo).join(' · '))]; }));
+}
 
-  // últimas 4 semanas
-  const labels=[], vals=[];
-  const hd=new Date();
-  for(let i=27;i>=0;i--){
-    const d=new Date(hd); d.setDate(hd.getDate()-i);
-    const key=d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate());
-    const r=records.find(x=>x.fecha===key);
-    const n=r&&r.crisis?r.crisis.filter(c=>c.tipo).length:0;
-    labels.push(i%7===0?['D','L','M','X','J','V','S'][d.getDay()]:'');
-    vals.push(n);
-  }
-
-  const maxV=Math.max(...vals,1);
-  const padL=10, padR=10, padT=10, padB=24;
-  const gW=W-padL-padR, gH=H-padT-padB;
-  const barW=gW/vals.length*0.6, gap=gW/vals.length;
-
-  ctx.clearRect(0,0,W,H);
-
-  // grid lines
-  ctx.strokeStyle=getCSSVar('--border'); ctx.lineWidth=1;
-  for(let i=0;i<=3;i++){
-    const y=padT+gH*(1-i/3);
-    ctx.beginPath(); ctx.moveTo(padL,y); ctx.lineTo(W-padR,y); ctx.stroke();
-  }
-
-  // bars
-  vals.forEach((v,i)=>{
-    const x=padL+i*gap+(gap-barW)/2;
-    const bH=v>0?(v/maxV)*gH:2;
-    const y=padT+gH-bH;
-    const alpha=v>0?0.9:0.15;
-    ctx.fillStyle=v>0?`rgba(248,113,113,${alpha})`:`rgba(124,111,247,0.1)`;
-    ctx.beginPath();
-    ctx.roundRect(x,y,barW,bH,3);
-    ctx.fill();
-    if(v>0){
-      ctx.fillStyle=getCSSVar('--red');
-      ctx.font='700 11px Inter';
-      ctx.textAlign='center';
-      ctx.fillText(v,x+barW/2,y-3);
+// 2 · MAPA DE CALOR (día de la semana × hora) ─────────────────────
+function g2(d){
+  const cont=Array.from({length:7},()=>new Array(24).fill(0));
+  let n=0;
+  d.registrados.forEach(f=>{ const w=diaSem(f); d.porFecha[f].crisis.forEach(c=>{ const m=aMin(c.inicio); if(m!=null){ cont[w][Math.floor(m/60)%24]++; n++; } }); });
+  document.getElementById('g2-sub').textContent=n?`Hora de inicio de ${n} crisis · toque una celda para ver el detalle`:'Sin crisis con hora de inicio en este período';
+  if(!n){ vacio('g2','Cuando registre crisis con hora de inicio, aquí verá a qué horas y días se concentran.'); tabla('g2-tabla',[],[]); return; }
+  const W=anchoDe('g2'), L=32, R=2, T=4, cw=(W-L-R)/24, ch=Math.max(18,Math.min(28,cw*1.5)), H=T+7*ch+20;
+  const max=Math.max(...cont.flat()); const op=[0,0.3,0.5,0.75,1];
+  const nivel=v=>v?Math.max(1,Math.ceil(v/max*4)):0;
+  let s='';
+  for(let w=0;w<7;w++){
+    s+=`<text class="tick" x="${L-6}" y="${T+w*ch+ch/2+4}" text-anchor="end">${DIAS_SEM[w]}</text>`;
+    for(let h=0;h<24;h++){
+      const v=cont[w][h], x=L+h*cw+1, yy=T+w*ch+1, lv=nivel(v);
+      s+=`<rect class="hm-base" x="${x}" y="${yy}" width="${cw-2}" height="${ch-2}" rx="3"/>`;
+      if(lv) s+=`<rect class="m-crisis" fill-opacity="${op[lv]}" x="${x}" y="${yy}" width="${cw-2}" height="${ch-2}" rx="3"/>`;
+      s+=`<rect class="hit" x="${x-1}" y="${yy-1}" width="${cw}" height="${ch}" data-tip="${esc(DIAS_SEM_LARGO[w]+' '+pad(h)+':00–'+pad(h)+':59 · '+v+' crisis')}"/>`;
     }
-  });
-
-  // labels eje x
-  ctx.fillStyle=getCSSVar('--text3');
-  ctx.font='10px Inter'; ctx.textAlign='center';
-  labels.forEach((l,i)=>{
-    if(l) ctx.fillText(l,padL+i*gap+gap/2,H-6);
-  });
+  }
+  for(let h=0;h<24;h+=3) s+=`<text class="tick" x="${L+h*cw+cw/2}" y="${H-4}" text-anchor="middle">${h}h</text>`;
+  document.getElementById('g2').innerHTML=svg(W,H,s,'Mapa de calor de crisis por día y hora');
+  // leyenda de la escala
+  const pasos=[0,1,2,3,4].map(lv=>`<span class="esc-paso"><svg width="16" height="16" aria-hidden="true"><rect class="hm-base" width="16" height="16" rx="3"/>${lv?`<rect class="m-crisis" fill-opacity="${op[lv]}" width="16" height="16" rx="3"/>`:''}</svg></span>`).join('');
+  document.getElementById('g2-leyenda').innerHTML=`<span>0</span>${pasos}<span>${max} crisis</span>`;
+  const porHora=[]; for(let h=0;h<24;h++){ const t=cont.reduce((a,row)=>a+row[h],0); if(t) porHora.push([pad(h)+':00–'+pad(h)+':59',t,cont.map((row,w)=>row[h]?DIAS_SEM[w]+' '+row[h]:'').filter(Boolean).join(', ')]); }
+  tabla('g2-tabla',['Hora','Crisis','Días'],porHora);
 }
 
-function drawHeatmap(){
-  const grid=document.getElementById('heatmap');
-  if(!grid)return;
-  const horas=new Array(24).fill(0);
-  records.forEach(r=>{ if(r.crisis) r.crisis.filter(c=>c.tipo&&c.inicio).forEach(c=>{ const h=parseInt(c.inicio.split(':')[0]); if(!isNaN(h)&&h>=0&&h<24)horas[h]++; }); });
-  const maxH=Math.max(...horas,1);
-  grid.innerHTML=horas.map((v,i)=>{
-    const a=v/maxH;
-    const color=a>0?`rgba(248,113,113,${0.15+a*0.8})`:'var(--surf3)';
-    return`<div class="hm-cell" style="background:${color}" title="${i}:00 — ${v} crisis"></div>`;
-  }).join('');
-}
-
-function drawMedsChart(){
-  const canvas=document.getElementById('chart-meds');
-  if(!canvas)return;
-  const ctx=canvas.getContext('2d');
-  const W=canvas.parentElement.clientWidth-20; const H=130;
-  canvas.width=W; canvas.height=H;
-
-  // últimas 7 semanas, % cumplimiento por semana
-  const semanas=[];
-  const hd=new Date();
-  for(let s=6;s>=0;s--){
-    const ini=new Date(hd); ini.setDate(hd.getDate()-s*7-6);
-    const fin=new Date(hd); fin.setDate(hd.getDate()-s*7);
-    let ok=0, total=0;
-    records.forEach(r=>{
-      const d=new Date(r.fecha);
-      if(d>=ini&&d<=fin&&r.meds){
-        getMedsArr(r).filter(m=>m.nombre).forEach(m=>{
-          total++; if(m.admin==='Sí ✓')ok++;
-        });
-      }
+// 3 · MEDICAMENTOS Y CRISIS ──────────────────────────────────────
+function g3(d){
+  const regs=d.registrados.map(f=>d.porFecha[f]);
+  const cuenta={}; regs.forEach(r=>new Set(r.meds.map(m=>nombreMed(m.nombre)).filter(Boolean)).forEach(n=>cuenta[n]=(cuenta[n]||0)+1));
+  const meds=Object.keys(cuenta).sort((a,b)=>cuenta[b]-cuenta[a]).slice(0,6);
+  document.getElementById('g3-sub').textContent='Promedio de crisis por día, según si ese día se dio el medicamento completo';
+  if(!meds.length||regs.length<2){ vacio('g3','Se necesitan al menos 2 días con medicamentos registrados.'); document.getElementById('g3-leyenda').innerHTML=''; tabla('g3-tabla',[],[]); return; }
+  const filas=meds.map(n=>{ const con=[],sin=[];
+    regs.forEach(r=>{ const e=r.meds.filter(m=>nombreMed(m.nombre)===n); (e.length&&e.every(m=>m.admin==='Sí ✓')?con:sin).push(r.crisis.length); });
+    return {n,con:prom(con),nCon:con.length,sin:prom(sin),nSin:sin.length}; });
+  const W=anchoDe('g3'), L=8, R=86, bh=13, gap=2, grupo=22+2*bh+gap+14, H=filas.length*grupo+4;
+  const maxV=Math.max(1,...filas.flatMap(f=>[f.con||0,f.sin||0])), gw=W-L-R, x=v=>v/maxV*gw;
+  let s='';
+  filas.forEach((f,i)=>{
+    const y0=i*grupo;
+    s+=`<text class="lbl-med" x="${L}" y="${y0+14}">${esc(f.n)}</text>`;
+    [['con','m-med',f.con,f.nCon,'Dosis completa'],['sin','m-omit',f.sin,f.nSin,'Omitida, parcial o sin registro']].forEach(([k,cls,v,nd,txt],j)=>{
+      const yy=y0+22+j*(bh+gap);
+      if(nd&&v>0) s+=`<path class="${cls}" d="${barH(L,yy,Math.max(3,x(v)),bh,4)}"/>`;
+      else if(nd) s+=`<rect class="${cls}" x="${L}" y="${yy}" width="2" height="${bh}"/>`;
+      const etq=nd?`${fmtNum(v)} · ${nd} día${nd!==1?'s':''}`:'sin días';
+      s+=`<text class="tick" x="${L+(nd?Math.max(3,x(v||0)):0)+6}" y="${yy+bh-2}">${etq}</text>`;
+      s+=`<rect class="hit" x="0" y="${yy-1}" width="${W}" height="${bh+gap}" data-tip="${esc(f.n+' · '+txt+': '+(nd?fmtNum(v)+' crisis por día en '+nd+' día'+(nd!==1?'s':''):'sin días'))}"/>`;
     });
-    const label='S'+(7-s);
-    semanas.push({label,pct:total>0?Math.round(ok/total*100):null});
-  }
-
-  const padL=30, padR=10, padT=10, padB=24;
-  const gW=W-padL-padR, gH=H-padT-padB;
-  const barW=gW/semanas.length*0.55, gap=gW/semanas.length;
-
-  ctx.clearRect(0,0,W,H);
-  // grid
-  ctx.strokeStyle=getCSSVar('--border'); ctx.lineWidth=1;
-  [0,25,50,75,100].forEach(v=>{
-    const y=padT+gH*(1-v/100);
-    ctx.beginPath(); ctx.moveTo(padL,y); ctx.lineTo(W-padR,y); ctx.stroke();
-    ctx.fillStyle=getCSSVar('--text3'); ctx.font='9px Inter'; ctx.textAlign='right';
-    ctx.fillText(v+'%',padL-4,y+3);
   });
-
-  semanas.forEach((s,i)=>{
-    if(s.pct===null)return;
-    const x=padL+i*gap+(gap-barW)/2;
-    const bH=(s.pct/100)*gH;
-    const y=padT+gH-bH;
-    const color=s.pct>=80?'rgba(74,222,128,0.85)':s.pct>=60?'rgba(251,191,36,0.85)':'rgba(248,113,113,0.85)';
-    ctx.fillStyle=color;
-    ctx.beginPath(); ctx.roundRect(x,y,barW,bH,3); ctx.fill();
-    ctx.fillStyle=getCSSVar('--text2'); ctx.font='700 10px Inter'; ctx.textAlign='center';
-    ctx.fillText(s.label,x+barW/2,H-6);
-  });
+  document.getElementById('g3').innerHTML=svg(W,H,s,'Medicamentos y crisis');
+  document.getElementById('g3-leyenda').innerHTML=`<span class="ley"><i class="sw m-med-bg"></i>Dosis completa ese día</span><span class="ley"><i class="sw m-omit-bg"></i>Omitida, parcial o sin registro</span>`;
+  tabla('g3-tabla',['Medicamento','Dosis completa','Omitida / sin registro'],filas.map(f=>[esc(f.n),f.nCon?fmtNum(f.con)+' ('+f.nCon+' d)':'–',f.nSin?fmtNum(f.sin)+' ('+f.nSin+' d)':'–']));
 }
 
-function drawRelacionChart(){
-  const canvas=document.getElementById('chart-relacion');
-  if(!canvas)return;
-  const ctx=canvas.getContext('2d');
-  const W=canvas.parentElement.clientWidth-20; const H=150;
-  canvas.width=W; canvas.height=H;
-
-  if(records.length<2){ 
-    ctx.fillStyle=getCSSVar('--text3'); ctx.font='13px Nunito'; ctx.textAlign='center';
-    ctx.fillText('Necesitas más registros para ver esta relación',W/2,H/2);
-    return;
-  }
-
-  // ordenar por fecha
-  const sorted=[...records].sort((a,b)=>a.fecha.localeCompare(b.fecha)).slice(-14);
-  const labels=sorted.map(r=>{ const p=r.fecha.split('-'); return pad(parseInt(p[2]))+'/'+pad(parseInt(p[1])); });
-  const crisisVals=sorted.map(r=>r.crisis?r.crisis.filter(c=>c.tipo).length:0);
-  const dietaVals=sorted.map(r=>{
-    if(!r.comidas||!r.comidas.length)return 0;
-    const completas=r.comidas.filter(c=>c.estado==='Completo').length;
-    return Math.round((completas/r.comidas.length)*100);
+// 4a · DIETA CETOGÉNICA Y CRISIS ──────────────────────────────────
+function g4dieta(d){
+  const cats=[['Todas las comidas completas',[]],['Alguna comida parcial',[]],['Rechazó alguna comida',[]]];
+  d.registrados.forEach(f=>{ const r=d.porFecha[f]; const est=r.comidas.map(c=>c.estado).filter(Boolean); if(!est.length) return;
+    const i=est.includes('No quiso')?2:est.includes('Parcial')?1:0; cats[i][1].push(r.crisis.length); });
+  const n=cats.reduce((a,c)=>a+c[1].length,0);
+  if(!n){ vacio('g4a','Registre comidas con su estado (Completo, Parcial o No quiso) para ver esta relación.'); tabla('g4a-tabla',[],[]); return; }
+  const W=anchoDe('g4a'), L=8, R=86, bh=14, grupo=22+bh+12, H=cats.length*grupo;
+  const maxV=Math.max(1,...cats.map(c=>prom(c[1])||0)), gw=W-L-R;
+  let s='';
+  cats.forEach(([nom,arr],i)=>{ const y0=i*grupo, v=prom(arr), nd=arr.length, yy=y0+22;
+    s+=`<text class="lbl-med" x="${L}" y="${y0+14}">${nom}</text>`;
+    if(nd&&v>0) s+=`<path class="m-comida" d="${barH(L,yy,Math.max(3,v/maxV*gw),bh,4)}"/>`; else if(nd) s+=`<rect class="m-comida" x="${L}" y="${yy}" width="2" height="${bh}"/>`;
+    s+=`<text class="tick" x="${L+(nd?Math.max(3,(v||0)/maxV*gw):0)+6}" y="${yy+bh-3}">${nd?fmtNum(v)+' · '+nd+' día'+(nd!==1?'s':''):'sin días'}</text>`;
+    s+=`<rect class="hit" x="0" y="${y0}" width="${W}" height="${grupo}" data-tip="${esc(nom+': '+(nd?fmtNum(v)+' crisis por día en '+nd+' día'+(nd!==1?'s':''):'sin días'))}"/>`;
   });
+  document.getElementById('g4a').innerHTML=svg(W,H,s,'Dieta cetogénica y crisis');
+  tabla('g4a-tabla',['Tipo de día','Días','Crisis','Promedio'],cats.map(([nom,a])=>[nom,a.length,a.reduce((x,y)=>x+y,0),a.length?fmtNum(prom(a)):'–']));
+}
 
-  const padL=30, padR=10, padT=14, padB=28;
-  const gW=W-padL-padR, gH=H-padT-padB;
-  const n=sorted.length;
-  const step=n>1?gW/(n-1):gW;
-
-  ctx.clearRect(0,0,W,H);
-  // grid
-  ctx.strokeStyle=getCSSVar('--border'); ctx.lineWidth=1;
-  for(let i=0;i<=4;i++){
-    const y=padT+gH*(i/4);
-    ctx.beginPath(); ctx.moveTo(padL,y); ctx.lineTo(W-padR,y); ctx.stroke();
-  }
-
-  const maxC=Math.max(...crisisVals,1);
-
-  // dieta line (verde, eje 0-100%)
-  ctx.strokeStyle='rgba(74,222,128,0.7)'; ctx.lineWidth=2.5;
-  ctx.beginPath();
-  dietaVals.forEach((v,i)=>{
-    const x=padL+i*step, y=padT+gH*(1-v/100);
-    i===0?ctx.moveTo(x,y):ctx.lineTo(x,y);
+// 4b · HORARIOS: comidas, medicamentos y crisis en el día ─────────
+function g4linea(d){
+  const dias=d.registrados.slice(-10).reverse();
+  if(!dias.length){ vacio('g4b','Aún no hay días registrados.'); return; }
+  const W=anchoDe('g4b'), L=40, R=8, T=20, fila=30, H=T+dias.length*fila+4, gw=W-L-R, x=m=>L+m/1440*gw;
+  let s='';
+  [0,6,12,18,24].forEach(h=>{ s+=`<line class="grid" x1="${x(h*60)}" x2="${x(h*60)}" y1="${T-4}" y2="${H-4}"/><text class="tick" x="${x(h*60)}" y="${T-8}" text-anchor="middle">${h}h</text>`; });
+  dias.forEach((f,i)=>{
+    const r=d.porFecha[f], cy=T+i*fila+fila/2;
+    s+=`<text class="tick" x="${L-8}" y="${cy+4}" text-anchor="end">${fmtCorta(f)}</text><line class="axis" x1="${L}" x2="${W-R}" y1="${cy}" y2="${cy}"/>`;
+    r.crisis.forEach(c=>{ const a=aMin(c.inicio); if(a==null) return; let b=aMin(c.fin); if(b==null||b<a) b=a+Math.max(1,parseInt(c.duracion)||1);
+      const x0=x(a), w=Math.max(6,x(b)-x0);
+      s+=`<rect class="m-crisis ring" x="${x0}" y="${cy-8}" width="${w}" height="16" rx="3"/>`;
+      s+=`<rect class="hit" x="${x0-8}" y="${cy-14}" width="${w+16}" height="28" data-tip="${esc(fmtCorta(f)+' · Crisis '+c.inicio+(c.fin?'–'+c.fin:'')+' · '+c.tipo)}"/>`; });
+    r.comidas.forEach(c=>{ const a=aMin(c.hora); if(a==null) return;
+      s+=`<circle class="m-comida ring" cx="${x(a)}" cy="${cy}" r="5"/><circle class="hit" cx="${x(a)}" cy="${cy}" r="13" data-tip="${esc(fmtCorta(f)+' · Comida '+c.hora+(c.estado?' · '+c.estado:''))}"/>`; });
+    r.meds.forEach(m=>{ const a=aMin(m.hora); if(a==null) return; const cx=x(a);
+      s+=`<path class="m-med ring" d="M${cx},${cy-7}L${cx+6},${cy+4}L${cx-6},${cy+4}Z"/><circle class="hit" cx="${cx}" cy="${cy}" r="13" data-tip="${esc(fmtCorta(f)+' · '+m.hora+' '+m.nombre+(m.dosis?' '+m.dosis:'')+(m.admin&&m.admin!=='Sí ✓'?' ('+m.admin+')':''))}"/>`; });
   });
-  ctx.stroke();
+  document.getElementById('g4b').innerHTML=svg(W,H,s,'Horarios de comidas, medicamentos y crisis');
+}
 
-  // fill under diet
-  ctx.fillStyle='rgba(74,222,128,0.08)';
-  ctx.beginPath();
-  dietaVals.forEach((v,i)=>{ const x=padL+i*step, y=padT+gH*(1-v/100); i===0?ctx.moveTo(x,y):ctx.lineTo(x,y); });
-  ctx.lineTo(padL+(n-1)*step,padT+gH); ctx.lineTo(padL,padT+gH); ctx.closePath(); ctx.fill();
+// 4c · HORAS DESDE LA ÚLTIMA COMIDA HASTA CADA CRISIS ─────────────
+function g4horas(d){
+  // todas las comidas (incluye días anteriores al período, para la primera crisis del día)
+  const comidas=[]; Object.values(d.todos).forEach(r=>r.comidas.forEach(c=>{ const m=aMin(c.hora); if(m!=null) comidas.push({t:new Date(r.fecha+'T00:00:00').getTime()/60000+m,f:r.fecha,h:c.hora}); }));
+  comidas.sort((a,b)=>a.t-b.t);
+  const filas=[], cubos=[0,0,0,0,0,0], ETQ=['<1 h','1–2 h','2–3 h','3–4 h','4–5 h','5 h o más'];
+  let sinPrev=0; const difs=[];
+  d.registrados.forEach(f=>d.porFecha[f].crisis.forEach(c=>{
+    const m=aMin(c.inicio); if(m==null) return;
+    const t=new Date(f+'T00:00:00').getTime()/60000+m;
+    let ult=null; for(const k of comidas){ if(k.t<=t) ult=k; else break; }
+    if(!ult||t-ult.t>24*60){ sinPrev++; filas.push([fmtCorta(f),c.inicio,'–','sin comida previa registrada']); return; }
+    const dif=t-ult.t; difs.push(dif); cubos[Math.min(5,Math.floor(dif/60))]++;
+    filas.push([fmtCorta(f),c.inicio,(ult.f===f?'':fmtCorta(ult.f)+' ')+ult.h,fmtHM(dif)]);
+  }));
+  const n=cubos.reduce((a,b)=>a+b,0);
+  const promMin=prom(difs);
+  document.getElementById('g4c-sub').textContent=n
+    ?`En promedio, las crisis empezaron ${fmtHM(promMin)} después de la última comida (${n} crisis${sinPrev?' · '+sinPrev+' sin comida previa registrada':''})`
+    :'Se necesitan crisis y comidas con hora registrada';
+  tabla('g4-tabla',['Fecha','Crisis','Última comida','Tiempo'],filas.reverse());
+  if(!n){ vacio('g4c','Registre la hora de las comidas y de las crisis para ver este gráfico.'); return; }
+  const W=anchoDe('g4c'), L=26, R=6, T=18, B=24, H=170, gw=W-L-R, gh=H-T-B, max=Math.max(...cubos), {step,top}=escalaEntera(max);
+  const slot=gw/6, bw=Math.min(40,slot-8), y=v=>T+gh-(v/top)*gh;
+  let s='';
+  for(let v=0;v<=top;v+=step) s+=`<line class="grid" x1="${L}" x2="${W-R}" y1="${y(v)}" y2="${y(v)}"/><text class="tick" x="${L-6}" y="${y(v)+4}" text-anchor="end">${v}</text>`;
+  // marca de las 4 horas (intervalo habitual entre comidas de la dieta)
+  const x4=L+4*slot;
+  s+=`<line class="axis" x1="${x4}" x2="${x4}" y1="${T-6}" y2="${T+gh}"/><text class="tick" x="${x4+4}" y="${T-6}">más de 4 h sin comer →</text>`;
+  cubos.forEach((v,i)=>{ const cx=L+i*slot+slot/2;
+    if(v) s+=`<path class="m-crisis" d="${barV(cx-bw/2,y(v),bw,T+gh-y(v),4)}"/><text class="lbl" x="${cx}" y="${y(v)-5}" text-anchor="middle">${v}</text>`;
+    s+=`<text class="tick" x="${cx}" y="${H-6}" text-anchor="middle">${ETQ[i]}</text>`;
+    s+=`<rect class="hit" x="${L+i*slot}" y="${T-6}" width="${slot}" height="${gh+10}" data-tip="${esc(ETQ[i]+' después de comer: '+v+' crisis')}"/>`; });
+  s+=`<line class="axis" x1="${L}" x2="${W-R}" y1="${T+gh}" y2="${T+gh}"/>`;
+  document.getElementById('g4c').innerHTML=svg(W,H,s,'Horas desde la última comida hasta cada crisis');
+}
 
-  // crisis bars
-  crisisVals.forEach((v,i)=>{
-    const x=padL+i*step-6;
-    const bH=v>0?(v/maxC)*gH*0.8:0;
-    const y=padT+gH-bH;
-    ctx.fillStyle=`rgba(248,113,113,${v>0?0.85:0})`;
-    ctx.beginPath(); ctx.roundRect(x,y,12,bH,2); ctx.fill();
-  });
-
-  // dots dieta
-  dietaVals.forEach((v,i)=>{
-    const x=padL+i*step, y=padT+gH*(1-v/100);
-    ctx.beginPath(); ctx.arc(x,y,3.5,0,Math.PI*2);
-    ctx.fillStyle='var(--green)'; ctx.fill();
-  });
-
-  // x labels
-  ctx.fillStyle=getCSSVar('--text3'); ctx.font='9px Inter'; ctx.textAlign='center';
-  labels.forEach((l,i)=>{ if(i%Math.ceil(n/6)===0||i===n-1) ctx.fillText(l,padL+i*step,H-6); });
-
-  // leyenda
-  ctx.font='700 10px Inter';
-  ctx.fillStyle='rgba(248,113,113,0.9)'; ctx.fillRect(padL,4,10,8); ctx.fillStyle=getCSSVar('--text2'); ctx.textAlign='left'; ctx.fillText('Crisis',padL+13,11);
-  ctx.fillStyle='rgba(74,222,128,0.9)'; ctx.fillRect(padL+70,4,10,8); ctx.fillStyle=getCSSVar('--text2'); ctx.fillText('% dieta completa',padL+83,11);
+// Período (un solo filtro para todos los gráficos) y detalle al tocar
+function elegirPeriodo(dias){
+  periodoDias=dias;
+  document.querySelectorAll('.periodo button').forEach(b=>b.setAttribute('aria-pressed',String(+b.dataset.dias===dias)));
+  renderAnalisis();
+}
+function initTip(){
+  const tip=document.getElementById('tip'), scr=document.getElementById('screen-analisis');
+  const mostrar=e=>{
+    const t=e.target.closest&&e.target.closest('[data-tip]');
+    if(!t||!scr.contains(t)){ tip.hidden=true; return; }
+    tip.textContent=t.getAttribute('data-tip'); tip.hidden=false;
+    const r=t.getBoundingClientRect(), tw=tip.offsetWidth, th=tip.offsetHeight;
+    const cx=e.clientX!=null&&e.clientX>0?e.clientX:r.left+r.width/2;
+    tip.style.left=Math.max(8,Math.min(window.innerWidth-tw-8,cx-tw/2))+'px';
+    let top=r.top-th-8; if(top<60) top=r.bottom+8;
+    tip.style.top=top+'px';
+  };
+  scr.addEventListener('pointerdown',mostrar);
+  scr.addEventListener('pointermove',e=>{ if(e.pointerType==='mouse') mostrar(e); });
+  scr.addEventListener('pointerleave',()=>{ tip.hidden=true; });
+  document.getElementById('main-content').addEventListener('scroll',()=>{ tip.hidden=true; },{passive:true});
+  let rt; window.addEventListener('resize',()=>{ clearTimeout(rt); rt=setTimeout(renderAnalisis,150); });
 }
 
 // NAV
